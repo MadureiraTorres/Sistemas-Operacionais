@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
+#include <stdio.h>
 
 /*
     3 processos A, B e C
@@ -17,7 +18,21 @@
 int main(){
     int pid = fork();
 
-    
+    if(pid != 0){
+        wait(NULL);
+        sleep(2);
+        printf("\nEu sou o processo %d, filho de %d\n", getpid(), getppid());
+    } else if(pid == 0){
+        int pidAux = fork();
+
+        if(pidAux != 0){
+            wait(NULL);
+            sleep(2);
+            printf("\nEu sou o processo %d, filho de %d\n", getpid(), getppid());
+        } else if(pidAux == 0){
+            printf("\nEu sou o processo %d, filho de %d\n", getpid(), getppid());
+        }
+    }
 
     return 0;
 }
