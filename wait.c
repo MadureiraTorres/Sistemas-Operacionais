@@ -15,17 +15,19 @@ int main(){
         if(WIFEXITED(status)){
 
             printf("\nProcesso filho encerrou normalmente\n");
+            printf("\nValor do status: %d\n", WEXITSTATUS(status));
         
         } else if(WIFSIGNALED(status)){
 
             printf("\nProcesso filho encerrou por um kill\n");
+            printf("\nValor do status: %d\n", WTERMSIG(status));
         
         }
 
     } else if(pid == 0){
         
         printf("\nCódigo do Filho: %d\n", getpid());
-        //while(1);
+        while(1);
         exit(0);
     
     }
