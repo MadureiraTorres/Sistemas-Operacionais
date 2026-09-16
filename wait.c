@@ -13,12 +13,19 @@ int main(){
         wait(&status);
 
         if(WIFEXITED(status)){
+
             printf("\nProcesso filho encerrou normalmente\n");
+        
+        } else if(WIFSIGNALED(status)){
+
+            printf("\nProcesso filho encerrou por um kill\n");
+        
         }
 
     } else if(pid == 0){
         
-        printf("\nCódigo do Filho");
+        printf("\nCódigo do Filho: %d\n", getpid());
+        //while(1);
         exit(0);
     
     }
